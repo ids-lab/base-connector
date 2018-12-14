@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd" >
+
+    <camelContext id="camel" trace="true" xmlns="http://camel.apache.org/schema/spring">
+
+        <route id="heartbeat">
+            <from id="route-timer" uri="timer:60sec?period=60000"/>
+            <log message="Heartbeat!"/>
+        </route>
+
+    </camelContext>
+
+</beans>

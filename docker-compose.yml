@@ -1,0 +1,21 @@
+version: "2"
+services:
+  execution-core-container:
+    container_name: execution-core-container
+    build: ./ecc
+    ports:
+      - "8161:8161"   # web interface
+      - "61610:61610" # SSL
+      - "61616:61616" # unencrypted
+      - "1883:1883"   # MQTT
+    volumes:
+      - ./activemq/data:/opt/activemq/data
+      - ./etc:/execution-core-container
+  portainer:
+    image: portainer/portainer
+    container_name: "connector-ui"
+    volumes:
+      - ./portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "9000:9000"
